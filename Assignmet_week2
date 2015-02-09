@@ -1,0 +1,38 @@
+--1. Which destination in the flights database is the furthest distance away?
+SELECT * from flights order by distance desc limit 1;
+--2. What are the different numbers of engines in the planes table? 
+	SELECT distinct engines from planes
+
+SELECT model,engines,max(seats) as max_seats from planes where engines=1  group by model,engines order by max(seats)desc limit 1;
+SELECT model,engines,max(seats) as max_seats  from planes where engines=2  group by model,engines order by max(seats)desc limit 1;
+SELECT model,engines,max(seats) as max_seats  from planes where engines=3  group by model,engines order by max(seats)desc limit 1;
+SELECT model,engines,max(seats) as max_seats  from planes where engines=4  group by model,engines order by max(seats)desc limit 1;
+
+--3. What weather conditions are associated with New York City departure delays?
+
+SELECT concat (f.month , '/' , f.day , '/' ,   f.year ) as depDate,   f.dep_time, f.dep_delay,  f.carrier, 
+       	f.tailnum, f.flight, f.origin, w.dewp, w.humid, w.wind_dir, 
+      	 w.wind_speed, w.wind_gust, w.precip, w.pressure, w.visib,w.temp
+ 	 FROM flights f  
+	INNER JOIN weather w
+ON f.year=w.year AND f.month = w.month AND f.day=w.day AND f.hour =w .	hour AND  f.origin=w.origin                                                                                                                                                                                             
+ 	 where wind_speed >8 and dep_delay >60 
+  	order by dep_delay desc 
+
+For me the wind Speed and wind direction  are the major factors that affect the flight delays.
+When 	wind_speed >8 and dep_delay >60  the delays are 7500
+  		wind_speed <=8 and dep_delay >60 the delays are  3400 
+		wind_dir >120 and dep_delay >60   the delays are 7444
+wind_dir <120 and dep_delay >60   the delays are 2862
+
+--4. Are older planes more likely to be delayed?
+
+	select P.year,count(f.dep_delay) FROM flights f  
+  	INNER JOIN planes P ON f.tailnum=p.tailnum
+  	where f.dep_delay >=0
+  	group By P.year  order by P.year
+
+When we look at the table with number of delays we see that newer planes are more likely getting delayed than older ones.
+--5. 
+Do you think the combination of altitude and weather conditions causes arrival delays?
+
