@@ -1,0 +1,234 @@
+
+Week9Assignment
+ 
+Sreejaya
+ 
+Monday, March 30, 2015
+ 
+using packages to read HTML, XML, and JSON file formats for downstream use in R data frames.
+ library(XML)
+library(RCurl) ## Loading required package: bitops library(rjson)
+library(ggvis) 
+
+Html Code
+ ## ## ## ## ## ## ## 
+## 
+
+
+
+## 
+
+Title 
+
+## 
+
+Author 
+
+## 
+
+ISBN 
+
+## 
+
+Price 
+
+## 
+
+
+## 
+
+
+## 
+
+Probability, With Applications and R 
+
+## 
+
+Robert P. Dobrow 
+
+978-1-118-24125-7 
+
+$140.00 
+
+## 
+
+
+## 
+
+
+## 
+
+Machine Learning with R 
+
+## 
+
+Brett Lantz 
+
+978-1782162148 
+
+$49.99 
+
+## 
+
+
+## 
+
+
+## 
+
+XML and Web Technologies for Data Sciences with R 
+
+## 
+
+Deborah Nolan; Duncan Lang Temple 
+
+978-1782162148 
+
+$49.99 
+
+## 
+
+
+## 
+## ## ##Html Code
+
+##<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1$$###/DTD/xhtml1-transitional.dtd">
+
+##<html xmlns="http://www.w3.org/1999/xhtml">
+##<head>
+##    <title>My Favourite Books</title>
+
+##</head>
+##<body>
+
+##<table class="tg">
+##  <tr>
+##    <th  title="Title">Title</th>
+##    <th  title="Title">Author</th>
+##    <th  title="Title">ISBN</th>
+##    <th  title="Title">Price</th>
+##  </tr>
+##  <tr>
+##    <td>Probability, With Applications and R</td>
+##    <td>Robert P. Dobrow</td><td>978-1-118-24125-7</td><td>$140.00</td>
+##  </tr>
+##  <tr>
+##    <td>Machine Learning with R</td>
+##    <td>Brett Lantz</td><td>978-1782162148</td><td>$49.99</td>
+##  </tr>
+##  <tr>
+##    <td>XML and Web Technologies for Data Sciences with R</td>
+##    <td>Deborah Nolan; Duncan Lang Temple</td><td>978-1782162148</td><td>$49.99</td>
+##  </tr>
+##</table>
+
+
+
+##</body>
+##</html> # load the information from HTML
+.htmlurl<-"C:/Users/administrator.BARNETTASSOCIAT/Desktop/week9Assignment.html"
+#get data
+.htmltable <- readHTMLTable(.htmlurl)
+
+.jsonurl <- "C:/Users/administrator.BARNETTASSOCIAT/Desktop/week9AssignmentJSON.txt" 
+
+XML file
+ ## 
+
+
+
+
+
+## 
+
+Robert P. Dobrow
+ 
+
+978-1-118-24125-7
+ 
+
+$140.00
+ 
+
+
+
+
+## 
+
+Brett Lantz
+ 
+
+978-1782162148
+ 
+
+$49.99
+ 
+
+
+
+
+## 
+
+Deborah Nolan; Duncan Lang Temple
+ 
+
+978-1782162148
+ 
+
+$49.99
+ 
+
+
+
+<?xml version="1.0" encoding="utf-8" ?>
+
+<FavoriteBooks>
+  <Book>
+    <Title>Probability, With Applications and R</Title>
+    <Author>Robert P. Dobrow</Author>
+    <ISBN>978-1-118-24125-7</ISBN>
+    <Price>$140.00</Price>
+  </Book>
+  <Book>
+    <Title>Machine Learning with R</Title>
+    <Author>Brett Lantz</Author>
+    <ISBN>978-1782162148</ISBN>
+    <Price>$49.99</Price>
+  </Book>
+  <Book>
+    <Title>XML and Web Technologies for Data Sciences with R</Title>
+    <Author>Deborah Nolan; Duncan Lang Temple</Author>
+    <ISBN>978-1782162148</ISBN>
+    <Price>$49.99</Price>
+  </Book>
+</FavoriteBooks> # load the information from XML
+.xmlurl <- xmlParse("C:/Users/administrator.BARNETTASSOCIAT/Desktop/week9Assignmentxml.xml")
+#get data
+.xmldata <- xmlToList(.xmlurl)
+.jsonurl <- "C:/Users/administrator.BARNETTASSOCIAT/Desktop/week9AssignmentJSON.txt" 
+
+JSON
+ 
+
+{
+ 
+
+“Title”: [ “Probability, With Applications and R”, “Machine Learning with R”, “XML and Web ##Technologies for Data Sciences with R” ],
+ 
+
+“Author”: [ “Robert P. Dobrow”, “Brett Lantz”, “Deborah Nolan; Duncan Lang Temple” ],
+ 
+
+“ISBN”: [ “978-1-118-24125-7”, “978-1782162148”, “978-1782162148” ],
+ 
+
+“Price”: [ 140.00, 49.99, 49.99 ]
+ 
+
+}
+ # load the information from json
+.jsonurl <- "C:/Users/administrator.BARNETTASSOCIAT/Desktop/week9AssignmentJSON.txt"
+
+#get data
+.jsonData <- fromJSON( file = .jsonurl)  
+```
